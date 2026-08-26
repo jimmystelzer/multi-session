@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MultiSession Isolador</title>
+  <link rel="stylesheet" href="popup.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo-group">
+        <div class="logo-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7" rx="2"></rect>
+            <rect x="14" y="3" width="7" height="7" rx="2"></rect>
+            <rect x="14" y="14" width="7" height="7" rx="2"></rect>
+            <rect x="3" y="14" width="7" height="7" rx="2"></rect>
+          </svg>
+        </div>
+        <div>
+          <h1>MultiSession</h1>
+          <span class="sub-title">Isolador de Abas</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Card de Status da Aba Atual -->
+    <div id="current-tab-card" class="card status-card">
+      <div class="status-header">
+        <span class="status-label">Aba Atual:</span>
+        <span id="tab-status-badge" class="badge badge-inactive">Padrão</span>
+      </div>
+      <p id="tab-url-text" class="tab-url">Carregando...</p>
+
+      <div id="active-session-info" class="session-info-box hidden">
+        <div class="session-tag">
+          <span id="current-session-badge" class="session-badge">S1</span>
+          <span id="current-session-name" class="session-name font-semibold">Sessão 1</span>
+        </div>
+        <p class="status-note">Esta aba roda em uma conta isolada.</p>
+      </div>
+
+      <div id="isolate-actions" class="action-buttons">
+        <button id="btn-isolate-current" class="btn btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          Isolar esta Aba Agora
+        </button>
+      </div>
+    </div>
+
+    <!-- Seção de Ações Rápidas -->
+    <section class="section">
+      <h2 class="section-title">Abrir Nova Aba Isolada</h2>
+      <div class="quick-launch-grid">
+        <button class="btn-quick" data-url="https://web.whatsapp.com">
+          <span class="icon-whatsapp">💬</span> WhatsApp Web
+        </button>
+        <button class="btn-quick" data-url="https://mail.google.com">
+          <span class="icon-gmail">✉️</span> Gmail
+        </button>
+        <button class="btn-quick" data-url="https://x.com">
+          <span class="icon-twitter">🐦</span> Twitter / X
+        </button>
+        <button class="btn-quick" data-url="https://discord.com/app">
+          <span class="icon-discord">🎮</span> Discord
+        </button>
+      </div>
+    </section>
+
+    <!-- Seção de Gerenciamento de Sessões -->
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">Sessões Salvas (<span id="sessions-count">0</span>)</h2>
+        <button id="btn-new-empty-session" class="btn-text">+ Nova Sessão</button>
+      </div>
+
+      <div id="sessions-list" class="sessions-list">
+        <!-- Itens inseridos dinamicamente pelo JS -->
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <span>Genérico e seguro para qualquer site</span>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

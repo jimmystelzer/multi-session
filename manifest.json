@@ -1,0 +1,48 @@
+{
+  "manifest_version": 3,
+  "name": "MultiSession - Isolador de Abas",
+  "version": "1.0.0",
+  "description": "Isole abas no Chrome/Edge para rodar múltiplas contas simultaneamente em qualquer site (WhatsApp, Gmail, etc).",
+  "permissions": [
+    "storage",
+    "tabs",
+    "tabGroups",
+    "scripting",
+    "contextMenus",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_start",
+      "world": "MAIN",
+      "all_frames": true
+    },
+    {
+      "matches": ["<all_urls>"],
+      "js": ["ui_content.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "MultiSession Isolador",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
