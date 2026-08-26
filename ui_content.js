@@ -191,8 +191,6 @@
   // 3. Realce na Página via Shadow DOM
   function renderSessionHighlight(session) {
     const color = session.color || '#3b82f6';
-    const name = session.name || 'Sessão Isolada';
-    const badgeText = session.badgeText || 'S';
 
     const host = document.createElement('div');
     host.id = 'multisession-highlight-root';
@@ -218,129 +216,15 @@
         z-index: 2147483647;
         pointer-events: none;
       }
-
-      .floating-badge {
-        position: fixed;
-        top: 10px;
-        right: 16px;
-        z-index: 2147483647;
-        pointer-events: auto;
-        background: rgba(15, 23, 42, 0.85);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        border-left: 4px solid ${color};
-        color: #f8fafc;
-        padding: 5px 10px;
-        border-radius: 20px;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        font-size: 11px;
-        font-weight: 600;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
-        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-        user-select: none;
-        opacity: 0.92;
-      }
-
-      .floating-badge:hover {
-        opacity: 1;
-        transform: translateY(2px);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
-      }
-
-      .status-dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background-color: ${color};
-        box-shadow: 0 0 6px ${color};
-      }
-
-      .badge-tag {
-        background: ${color};
-        color: #ffffff;
-        font-size: 9px;
-        font-weight: 800;
-        padding: 1px 5px;
-        border-radius: 4px;
-        text-transform: uppercase;
-      }
-
-      .session-title {
-        max-width: 140px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
-      .toggle-btn {
-        background: none;
-        border: none;
-        color: #94a3b8;
-        cursor: pointer;
-        font-size: 12px;
-        padding: 0 2px;
-        display: flex;
-        align-items: center;
-        line-height: 1;
-        transition: color 0.15s;
-      }
-
-      .toggle-btn:hover {
-        color: #ffffff;
-      }
-
-      .floating-badge.collapsed .session-title,
-      .floating-badge.collapsed .badge-tag {
-        display: none;
-      }
-
-      .floating-badge.collapsed {
-        padding: 5px 8px;
-      }
     `;
 
     const wrapper = document.createElement('div');
     wrapper.innerHTML = `
       <div class="top-glow-bar"></div>
-      <div class="floating-badge" id="badge-pill">
-        <span class="status-dot"></span>
-        <span class="badge-tag">${badgeText}</span>
-        <span class="session-title">${escapeHtml(name)}</span>
-        <button class="toggle-btn" id="btn-toggle" title="Minimizar / Expandir indicador">✕</button>
-      </div>
     `;
 
     shadow.appendChild(style);
     shadow.appendChild(wrapper);
-
-    const badgePill = shadow.getElementById('badge-pill');
-    const btnToggle = shadow.getElementById('btn-toggle');
-    let collapsed = false;
-
-    btnToggle.addEventListener('click', (e) => {
-      e.stopPropagation();
-      collapsed = !collapsed;
-      if (collapsed) {
-        badgePill.classList.add('collapsed');
-        btnToggle.textContent = '🔒';
-        btnToggle.title = 'Expandir indicador de sessão';
-      } else {
-        badgePill.classList.remove('collapsed');
-        btnToggle.textContent = '✕';
-        btnToggle.title = 'Minimizar indicador';
-      }
-    });
   }
 
-  function escapeHtml(str) {
-    return String(str)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;');
-  }
 })();
